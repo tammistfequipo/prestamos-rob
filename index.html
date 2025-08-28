@@ -9,495 +9,97 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #000;                 /* fondo negro puro */
-      --card: #0b0f14;            /* panel oscuro */
-      --muted: #b8c4d9;           /* texto secundario */
-      --text: #fff;               /* texto */
-      --brand: #00e5ff;           /* celeste neón */
-      --accent: #00b3ff;          /* celeste intenso */
+      --bg: #000;
+      --card: #0b0f14;
+      --muted: #b8c4d9;
+      --text: #fff;
+      --brand: #00e5ff;
+      --accent: #00b3ff;
       --danger: #ff3b6b;
       --success: #2efea3;
       --warning: #ffd166;
-      --radius: 16px;
+      --radius: 14px;
       --divider: rgba(255,255,255,.14);
       --glow: 0 0 8px rgba(0,229,255,.9), 0 0 22px rgba(0,229,255,.5), 0 0 44px rgba(0,179,255,.35);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-
-    /* ===== HEADER ===== */
-    header{position:sticky;top:0;z-index:30;background:#05070a;border-bottom:1px solid var(--divider);box-shadow:var(--glow)}
+    body{margin:0;font-family:Inter,sans-serif;color:var(--text);background:var(--bg)}
+    h1{color:var(--brand);text-shadow:var(--glow)}
     .wrap{max-width:1200px;margin:0 auto;padding:16px}
-    h1{margin:0;font-size:clamp(24px,3.2vw,36px);font-weight:900;letter-spacing:.6px;color:var(--brand);text-shadow:var(--glow)}
-    .subtitle{color:#cfe9ff;font-weight:600;opacity:.9}
-
-    /* ===== LAYOUT ===== */
     .grid{display:grid;gap:16px}
-    @media(min-width:980px){.grid-cols-2{grid-template-columns: 460px 1fr}}
-
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));border:1px solid var(--divider);border-radius:var(--radius);padding:16px;box-shadow:var(--glow)}
-    .card h2{margin:.1rem 0 .8rem;font-size:18px;text-shadow:var(--glow)}
-
-    label{display:block;font-size:12px;color:var(--muted);margin:8px 0 6px}
-    input,select{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--divider);background:#0a0f16;color:#fff;font-weight:600}
-    input:focus,select:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,229,255,.18)}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:12px;border:1px solid var(--divider);background:linear-gradient(180deg, rgba(0,229,255,.28), rgba(0,179,255,.22));color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:.6px;cursor:pointer;text-shadow:0 0 10px rgba(0,229,255,.6)}
-    .btn:hover{filter:brightness(1.08)}
+    @media(min-width:960px){.grid-cols-2{grid-template-columns:420px 1fr}}
+    .card{background:#0d1118;border:1px solid var(--divider);border-radius:var(--radius);padding:16px;box-shadow:var(--glow)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--divider);background:linear-gradient(180deg, rgba(0,229,255,.22), rgba(0,179,255,.18));color:#fff;font-weight:800;letter-spacing:.3px;cursor:pointer;text-transform:none;text-shadow:none;line-height:1}
+    .btn:hover{filter:brightness(1.06)}
     .btn.ghost{background:transparent}
-    .btn.danger{background:linear-gradient(180deg, rgba(255,59,107,.32), rgba(255,59,107,.18))}
-    .btn.success{background:linear-gradient(180deg, rgba(46,254,163,.32), rgba(46,254,163,.18))}
-    .toolbar{display:flex;flex-wrap:wrap;gap:8px}
-
-    /* ===== KPIs ===== */
-    .summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
-    .kpi{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));border:1px solid var(--divider);border-radius:12px;padding:12px;box-shadow:var(--glow)}
-    .kpi .label{font-size:12px;color:var(--muted)}
-    .kpi .val{font-size:22px;font-weight:900;margin-top:6px;text-shadow:var(--glow)}
-
-    /* ===== PLAN ===== */
-    details.plan{margin-top:10px}
-    details > summary{cursor:pointer;list-style:none}
-    details > summary::-webkit-details-marker{display:none}
-    .schedule{margin-top:8px;border:1px solid var(--divider);border-radius:12px;overflow:hidden}
-    .schedule-row{display:grid;grid-template-columns:62px 1fr 140px 140px 120px;gap:8px;padding:10px}
-    .schedule-row:nth-child(odd){background:rgba(255,255,255,.04)}
-    .schedule-head{font-size:12px;color:var(--muted);background:rgba(255,255,255,.07);text-transform:uppercase}
-
-    /* ===== LISTA ===== */
-    .searchbar{display:flex;gap:8px;align-items:center;margin:8px 0 12px}
-    .searchbar input{flex:1}
-    .progress{height:10px;background:#071219;border-radius:999px;overflow:hidden;border:1px solid var(--divider);box-shadow:var(--glow)}
-    .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--accent))}
-
-    table{width:100%;border-collapse:collapse;table-layout:fixed}
-    thead th{font-size:12px;color:var(--muted);text-transform:uppercase}
-    th,td{padding:12px 10px;border-bottom:1px solid var(--divider)}
-    td .mono{white-space:nowrap}
-    .col-cliente{width:28%}
-    .col-prestamo{width:32%}
-    .col-cuotas{width:10%}
-    .col-prox{width:14%}
-    .col-estado{width:10%}
-    .col-acciones{width:36ch}
-
-    .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;font-size:12px;border:1px solid var(--divider);box-shadow:var(--glow)}
-    .chip.success{background:rgba(46,254,163,.15);color:#d5ffe9;border-color:rgba(46,254,163,.45)}
-    .chip.danger{background:rgba(255,59,107,.18);color:#ffd2de;border-color:rgba(255,59,107,.55)}
-    .chip.warning{background:rgba(0,229,255,.14);color:#e6fbff;border-color:rgba(0,229,255,.4)}
-
-    .tools-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-
-    /* ===== GATE PIN ===== */
-    .gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.96),#000);z-index:9999}
-    .gate-card{width:min(420px,92vw);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--divider);border-radius:18px;padding:20px;text-align:center;box-shadow:var(--glow)}
-    .gate h3{margin:.2rem 0 .6rem;font-size:24px;color:var(--brand);text-shadow:var(--glow)}
-    .pin{letter-spacing:8px;font-weight:900;text-align:center}
-    .shake{animation:shake .4s}
-    @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+    .btn.danger{background:linear-gradient(180deg, rgba(255,59,107,.28), rgba(255,59,107,.18))}
+    .btn.success{background:linear-gradient(180deg, rgba(46,254,163,.28), rgba(46,254,163,.18))}
+    .btn.primary{background:linear-gradient(180deg, rgba(0,229,255,.30), rgba(0,179,255,.22))}
+    .btn.sm{padding:7px 10px; font-size:12px; border-radius:8px; font-weight:700; letter-spacing:.1px}
+    .btn.success{background:#1e9e6f;color:#fff}
+    .btn.danger{background:#b83250;color:#fff}
+    .btn.ghost{background:transparent;border:1px solid var(--divider);color:#fff}
+    .btn.primary{background:#007f9e;color:#fff}
+    .toolbar{display:flex;flex-wrap:wrap;gap:6px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px 6px;border-bottom:1px solid var(--divider);font-size:13px}
+    th{color:var(--muted);text-align:left;font-size:12px;text-transform:uppercase}
+    .tools-row{display:grid;grid-template-columns:repeat(auto-fit, minmax(112px, max-content));gap:6px;align-items:center}
+    @media(min-width:1100px){.tools-row{justify-content:flex-start;grid-auto-flow:row;grid-template-columns:repeat(5, max-content)}}
+    .chip{padding:4px 8px;border-radius:999px;font-size:11px;font-weight:600}
+    .chip.success{background:#1e9e6f;color:#fff}
+    .chip.danger{background:#b83250;color:#fff}
+    .chip.warning{background:#007f9e;color:#fff}
   </style>
 </head>
 <body>
-  <!-- GATE PIN -->
-  <div class="gate" id="gate" style="display:none">
-    <div class="gate-card" id="gateCard">
-      <h3>Acceso privado</h3>
-      <p class="subtitle">Ingresá tu PIN para abrir el gestor</p>
-      <input id="pinInput" class="pin" type="password" placeholder="••••" maxlength="6" inputmode="numeric" style="margin:12px 0;padding:16px 18px;border-radius:14px;width:100%;border:1px solid var(--divider);background:#0a0f16;color:#fff" />
-      <div class="toolbar" style="justify-content:center;margin-top:8px">
-        <button class="btn" id="btnAcceder">Acceder</button>
-      </div>
-      <p class="subtitle" style="opacity:.75">Tip: podés cerrar sesión desde "Cerrar sesión" en la lista.</p>
-    </div>
-  </div>
-
-  <header>
-    <div class="wrap">
-      <h1>Gestor de Préstamos — 60% semanal (4 cuotas)</h1>
-      <div class="subtitle">estilo casino neón • alto contraste</div>
-    </div>
-  </header>
-
-  <main class="wrap grid grid-cols-2">
-    <!-- Columna izquierda: Calculadora -->
-    <section class="card">
-      <h2>Nuevo préstamo</h2>
-      <div class="row">
-        <div>
-          <label>Cliente</label>
-          <input id="cli" placeholder="Nombre y apellido" />
-        </div>
-        <div>
-          <label>WhatsApp</label>
-          <input id="tel" placeholder="Ej. 11 6235 3193" />
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Monto prestado</label>
-          <input id="monto" type="number" min="0" step="100" value="10000" />
-        </div>
-        <div>
-          <label>Cuotas (semanales)</label>
-          <input id="cuotas" type="number" min="1" max="52" value="4" />
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Recargo (%)</label>
-          <input id="tasa" type="number" min="0" step="1" value="60" />
-        </div>
-        <div>
-          <label>Modalidad</label>
-          <select id="modalidad">
-            <option value="fijo">Recargo fijo total (recomendado)</option>
-            <option value="compuesto">Interés semanal compuesto (cuota nivelada)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Fecha de inicio</label>
-          <input id="inicio" type="date" />
-        </div>
-        <div>
-          <label>Gracia (días antes de mora)</label>
-          <input id="gracia" type="number" min="0" value="0" />
-        </div>
-      </div>
-
-      <div class="toolbar" style="margin-top:12px">
-        <button class="btn" id="btnCalcular">Calcular</button>
-        <button class="btn" id="btnGuardar">Guardar préstamo</button>
-        <button class="btn ghost" id="btnLimpiar">Limpiar</button>
-      </div>
-
-      <div class="summary">
-        <div class="kpi"><div class="label">Total a devolver</div><div class="val" id="kTotal">—</div></div>
-        <div class="kpi"><div class="label">Cuota semanal</div><div class="val" id="kCuota">—</div></div>
-        <div class="kpi"><div class="label">Fin del plan</div><div class="val" id="kFin">—</div></div>
-      </div>
-
-      <details class="plan">
-        <summary class="subtitle">Ver plan de pagos</summary>
-        <div class="schedule" id="previewPlan"></div>
-      </details>
-
-      <p class="subtitle" style="margin-top:8px">Consejo: “Recargo fijo total” reparte el 60% en partes iguales y es más claro para el cliente. “Compuesto” es mucho más caro.</p>
-    </section>
-
-    <!-- Columna derecha: Lista -->
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-        <h2 style="margin:0">Préstamos guardados</h2>
-        <div class="toolbar">
-          <button class="btn" id="btnExport">Exportar JSON</button>
-          <label class="btn" for="fileImport" style="cursor:pointer">Importar</label>
-          <input id="fileImport" type="file" accept="application/json" style="display:none" />
-          <button class="btn danger" id="btnBorrarTodo">Borrar todo</button>
-          <button class="btn ghost" id="btnLogout">Cerrar sesión</button>
-        </div>
-      </div>
-
-      <div class="searchbar">
-        <input id="q" placeholder="Buscar por cliente o teléfono…" />
-        <select id="fEstado">
-          <option value="todos">Todos</option>
-          <option value="activo">Activos</option>
-          <option value="mora">En mora</option>
-          <option value="cancelado">Cancelados</option>
+  <div class="wrap">
+    <h1>Gestor de Préstamos — 60% semanal</h1>
+    <main class="grid grid-cols-2">
+      <section class="card">
+        <h2>Nuevo préstamo</h2>
+        <label>Cliente</label><input id="cli" />
+        <label>WhatsApp</label><input id="tel" />
+        <label>Monto</label><input id="monto" type="number" value="10000" />
+        <label>Cuotas</label><input id="cuotas" type="number" value="4" />
+        <label>Recargo (%)</label><input id="tasa" type="number" value="60" />
+        <label>Modalidad</label>
+        <select id="modalidad">
+          <option value="fijo">Recargo fijo</option>
+          <option value="compuesto">Compuesto</option>
         </select>
-      </div>
-
-      <div class="kpi" style="margin-bottom:10px">
-        <div class="label">Cobrado / Total cartera</div>
-        <div class="progress" style="margin-top:8px"><i id="barCobro" style="width:0%"></i></div>
-        <div class="subtitle" id="lblCobro" style="margin-top:6px">—</div>
-      </div>
-
-      <div style="overflow:auto; max-height:58vh; border:1px solid var(--divider); border-radius:12px">
+        <div class="toolbar" style="margin-top:10px">
+          <button class="btn primary">Calcular</button>
+          <button class="btn success">Guardar</button>
+          <button class="btn ghost">Limpiar</button>
+        </div>
+      </section>
+      <section class="card">
+        <h2>Préstamos guardados</h2>
         <table>
           <thead>
-            <tr>
-              <th class="col-cliente">Cliente</th>
-              <th class="col-prestamo">Préstamo</th>
-              <th class="col-cuotas">Cuotas</th>
-              <th class="col-prox">Próxima</th>
-              <th class="col-estado">Estado</th>
-              <th class="col-acciones">Acciones</th>
-            </tr>
+            <tr><th>Cliente</th><th>Préstamo</th><th>Cuotas</th><th>Próxima</th><th>Estado</th><th>Acciones</th></tr>
           </thead>
-          <tbody id="rows"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <template id="tplPlan">
-    <div class="schedule-row schedule-head">
-      <div>#</div><div>Fecha</div><div>Cuota</div><div>Saldo</div><div>Pago</div>
-    </div>
-  </template>
-
-  <script>
-    // === GATE PIN ===
-    (function(){
-      const PIN_CORRECTO = '5155';
-      const KEY_OK = 'prestamos_pin_ok';
-      const gate = document.getElementById('gate');
-      const pin = document.getElementById('pinInput');
-      const btn = document.getElementById('btnAcceder');
-      const card = document.getElementById('gateCard');
-      function abrir(){ gate.style.display='none'; }
-      function bloquear(){ gate.style.display='flex'; pin.value=''; pin.focus(); }
-      function check(){
-        const val = pin.value.trim();
-        if(val === PIN_CORRECTO){ localStorage.setItem(KEY_OK, '1'); abrir(); }
-        else{ card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); pin.value=''; pin.focus(); }
-      }
-      document.addEventListener('DOMContentLoaded', ()=>{ if(localStorage.getItem(KEY_OK)==='1') abrir(); else bloquear(); });
-      btn.addEventListener('click', check);
-      pin.addEventListener('keydown', e=>{ if(e.key==='Enter') check(); });
-      document.addEventListener('click', e=>{ if(e.target.closest('#btnLogout')){ localStorage.removeItem(KEY_OK); bloquear(); }});
-    })();
-
-    // === Utils ===
-    const fmt = n => new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n||0);
-    const d2 = d => d.toISOString().slice(0,10);
-    const addDays = (d,days)=>{const x=new Date(d); x.setDate(x.getDate()+days); return x};
-
-    // === Estado ===
-    const KEY='prestamos_v1';
-    const $ = s => document.querySelector(s);
-    const state = {
-      items: [],
-      get summary(){
-        const tot = this.items.reduce((a,p)=> a + p.plan.reduce((x,c)=> x + c.cuota, 0), 0);
-        const cob = this.items.reduce((a,p)=> a + p.plan.filter(c=>c.pagado).reduce((x,c)=> x + c.cuota, 0), 0);
-        return {tot, cob, pct: tot? (cob/tot*100):0};
-      }
-    };
-
-    const el = {
-      cli: $('#cli'), tel: $('#tel'), monto: $('#monto'), cuotas: $('#cuotas'), tasa: $('#tasa'), modalidad: $('#modalidad'), inicio: $('#inicio'), gracia: $('#gracia'),
-      kTotal: $('#kTotal'), kCuota: $('#kCuota'), kFin: $('#kFin'),
-      preview: $('#previewPlan'), rows: $('#rows'),
-      q: $('#q'), fEstado: $('#fEstado'),
-      barCobro: $('#barCobro'), lblCobro: $('#lblCobro')
-    };
-
-    el.inicio.value = d2(new Date());
-
-    // === Cálculos ===
-    function calcPlan({monto, tasa, cuotas, modalidad, inicio}){
-      const plan = [];
-      const r = tasa/100; // semanal
-      if(modalidad === 'fijo'){
-        const total = monto * (1 + r);
-        const cuota = total / cuotas;
-        let saldo = total;
-        for(let i=1;i<=cuotas;i++){
-          saldo = +(saldo - cuota).toFixed(2);
-          plan.push({n:i, fecha: d2(addDays(new Date(inicio), (i-1)*7)), cuota: cuota, saldo: Math.max(saldo,0), pagado:false, pagoFecha:null});
-        }
-        return {total, cuota, plan};
-      } else {
-        const i = r; const n = cuotas; const PV = monto;
-        const factor = Math.pow(1+i, n);
-        const cuota = PV * i * factor / (factor - 1);
-        let saldo = PV;
-        for(let k=1;k<=n;k++){
-          const interes = saldo * i;
-          const amort = cuota - interes;
-          saldo = +(saldo - amort).toFixed(2);
-          plan.push({n:k, fecha: d2(addDays(new Date(inicio), (k-1)*7)), cuota: cuota, saldo: Math.max(saldo,0), pagado:false, pagoFecha:null});
-        }
-        const total = plan.reduce((a,c)=> a + c.cuota, 0);
-        return {total, cuota, plan};
-      }
-    }
-
-    function renderPreview(cfg){
-      const {total, cuota, plan} = calcPlan(cfg);
-      el.kTotal.textContent = fmt(total);
-      el.kCuota.textContent = fmt(cuota);
-      el.kFin.textContent = plan.length? plan[plan.length-1].fecha : '—';
-
-      const root = document.createElement('div');
-      root.appendChild(document.getElementById('tplPlan').content.cloneNode(true));
-      plan.forEach(c=>{
-        const row = document.createElement('div');
-        row.className = 'schedule-row';
-        row.innerHTML = `<div>${c.n}</div><div>${c.fecha}</div><div>${fmt(c.cuota)}</div><div>${fmt(c.saldo)}</div><div class="subtitle">pendiente</div>`;
-        root.appendChild(row);
-      });
-      el.preview.innerHTML=''; el.preview.appendChild(root);
-    }
-
-    function leerForm(){
-      const monto = parseFloat(el.monto.value||0);
-      const cuotas = parseInt(el.cuotas.value||1);
-      const tasa = parseFloat(el.tasa.value||0);
-      const modalidad = el.modalidad.value;
-      const inicio = el.inicio.value || d2(new Date());
-      return {monto, cuotas, tasa, modalidad, inicio};
-    }
-
-    ;[el.monto, el.cuotas, el.tasa, el.modalidad, el.inicio].forEach(x=> x.addEventListener('input', ()=> renderPreview(leerForm())));
-    document.getElementById('btnCalcular').addEventListener('click', ()=> renderPreview(leerForm()));
-
-    // === Persistencia ===
-    function persist(){ localStorage.setItem(KEY, JSON.stringify(state.items)); }
-    function restore(){ try{ state.items = JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ state.items=[] }
-      renderList(); renderPreview(leerForm()); }
-
-    // Estado/mora
-    function inMora(item){
-      const next = item.plan.find(c=>!c.pagado);
-      if(!next) return false;
-      const due = addDays(new Date(next.fecha), item.gracia||0);
-      return new Date() > due;
-    }
-    function formatEstado(item){
-      if(item.plan.every(c=>c.pagado)) return '<span class="chip success">Cancelado</span>';
-      if(inMora(item)) return '<span class="chip danger">En mora</span>';
-      return '<span class="chip warning">Activo</span>';
-    }
-    function nextFecha(item){
-      const next = item.plan.find(c=>!c.pagado);
-      return next? next.fecha : '—';
-    }
-
-    function renderList(){
-      const q = (el.q.value||'').trim().toLowerCase();
-      const fe = el.fEstado.value||'todos';
-      const data = state.items.filter(p=>{
-        const okQ = !q || (p.cliente.toLowerCase().includes(q) || (p.tel||'').toLowerCase().includes(q));
-        let okE = true;
-        if(fe==='activo') okE = (!p.plan.every(c=>c.pagado) && !inMora(p));
-        if(fe==='mora') okE = inMora(p);
-        if(fe==='cancelado') okE = p.plan.every(c=>c.pagado);
-        return okQ && okE;
-      });
-
-      const {tot, cob, pct} = state.summary;
-      el.barCobro.style.width = pct.toFixed(1)+'%';
-      el.lblCobro.textContent = `${fmt(cob)} cobrados de ${fmt(tot)} (${pct.toFixed(1)}%)`;
-
-      el.rows.innerHTML='';
-      data.forEach(item=>{
-        const pagadas = item.plan.filter(c=>c.pagado).length;
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td class="col-cliente">
-            <div style="font-weight:800;letter-spacing:.3px;text-shadow:var(--glow)">${item.cliente}</div>
-            <div class="subtitle" style="font-size:12px">${item.tel||''}</div>
-          </td>
-          <td class="col-prestamo">
-            <div class="mono" style="font-weight:700">${fmt(item.monto)} → <strong style="text-shadow:var(--glow)">${fmt(item.total)}</strong></div>
-            <div class="subtitle mono">(${item.cuotas}× ${fmt(item.cuota)})</div>
-            <div class="progress" style="margin-top:8px"><i style="width:${(pagadas/item.cuotas*100).toFixed(0)}%"></i></div>
-          </td>
-          <td class="col-cuotas">${pagadas}/${item.cuotas}</td>
-          <td class="col-prox mono">${nextFecha(item)}</td>
-          <td class="col-estado">${formatEstado(item)}</td>
-          <td class="col-acciones">
-            <div class="tools-row">
-              <button class="btn success" data-act="pagar" data-id="${item.id}">Pagar cuota</button>
-              <button class="btn" data-act="plan" data-id="${item.id}">Ver plan</button>
-              <button class="btn" data-act="wa" data-id="${item.id}">WhatsApp</button>
-              <button class="btn ghost" data-act="editar" data-id="${item.id}">Editar</button>
-              <button class="btn danger" data-act="borrar" data-id="${item.id}">Borrar</button>
+          <tbody>
+            <tr>
+              <td>Tamara</td>
+              <td>$300.000 → $480.000</td>
+              <td>8/8</td>
+              <td>—</td>
+              <td><span class="chip success">Cancelado</span></td>
+              <td>
+                <div class="tools-row">
+              <button class="btn success sm" data-act="pagar" data-id="${item.id}">Pagar cuota</button>
+              <button class="btn sm" data-act="plan" data-id="${item.id}">Ver plan</button>
+              <button class="btn sm" data-act="wa" data-id="${item.id}">WhatsApp</button>
+              <button class="btn ghost sm" data-act="editar" data-id="${item.id}">Editar</button>
+              <button class="btn danger sm" data-act="borrar" data-id="${item.id}">Borrar</button>
             </div>
-          </td>`;
-        el.rows.appendChild(row);
-      });
-    }
-
-    document.getElementById('btnGuardar').addEventListener('click', ()=>{
-      const cfg = leerForm();
-      if(!el.cli.value.trim()) return alert('Completá el nombre del cliente');
-      if(!cfg.monto || cfg.monto<=0) return alert('Ingresá un monto válido');
-      const {total, cuota, plan} = calcPlan(cfg);
-      const id = 'P' + Date.now().toString(36);
-      const item = {
-        id, cliente: el.cli.value.trim(), tel: el.tel.value.trim(), monto: cfg.monto, tasa: cfg.tasa, cuotas: cfg.cuotas,
-        modalidad: cfg.modalidad, inicio: cfg.inicio, gracia: parseInt(el.gracia.value||0), total: Math.round(total), cuota: Math.round(cuota),
-        plan: plan.map(c=>({...c, cuota: Math.round(c.cuota)})), creado: new Date().toISOString()
-      };
-      state.items.unshift(item); persist(); renderList(); el.cli.value=''; el.tel.value=''; alert('Préstamo guardado');
-    });
-
-    document.getElementById('btnLimpiar').addEventListener('click', ()=>{
-      el.cli.value=''; el.tel.value=''; el.monto.value='10000'; el.cuotas.value='4'; el.tasa.value='60'; el.modalidad.value='fijo'; el.inicio.value=d2(new Date()); el.gracia.value='0';
-      renderPreview(leerForm());
-    });
-
-    // Exportar / Importar / Borrar todo
-    document.getElementById('btnExport').addEventListener('click', ()=>{
-      const blob = new Blob([JSON.stringify(state.items, null, 2)], {type:'application/json'});
-      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'prestamos.json'; a.click();
-    });
-    document.getElementById('fileImport').addEventListener('change', async (e)=>{
-      const f = e.target.files[0]; if(!f) return; try{ const text = await f.text(); const data = JSON.parse(text); if(!Array.isArray(data)) throw new Error('Formato inválido'); state.items = data; persist(); renderList(); alert('Importado OK'); }catch(err){ alert('Error al importar: '+ err.message) } e.target.value='';
-    });
-    document.getElementById('btnBorrarTodo').addEventListener('click', ()=>{
-      if(confirm('¿Borrar TODOS los préstamos guardados en este dispositivo?')){ localStorage.removeItem(KEY); state.items=[]; renderList(); }
-    });
-
-    // Buscar / filtrar
-    el.q.addEventListener('input', renderList);
-    el.fEstado.addEventListener('change', renderList);
-
-    // Ver plan / pagar / wa / editar / borrar
-    el.rows.addEventListener('click', (ev)=>{
-      const btn = ev.target.closest('button'); if(!btn) return;
-      const id = btn.getAttribute('data-id'); const act = btn.getAttribute('data-act');
-      const item = state.items.find(x=>x.id===id); if(!item) return;
-      if(act==='pagar'){
-        const cuota = item.plan.find(c=>!c.pagado); if(!cuota) return alert('Este préstamo ya está cancelado.');
-        if(confirm(`Confirmar pago de ${fmt(cuota.cuota)} (cuota #${cuota.n}) para ${item.cliente}?`)){
-          cuota.pagado = true; cuota.pagoFecha = d2(new Date()); persist(); renderList();
-        }
-      }
-      if(act==='borrar'){
-        if(confirm('¿Eliminar este préstamo? Esta acción no se puede deshacer.')){ state.items = state.items.filter(x=>x.id!==id); persist(); renderList(); }
-      }
-      if(act==='plan'){
-        mostrarPlan(item);
-      }
-      if(act==='wa'){
-        const next = item.plan.find(c=>!c.pagado);
-        const txt = next ? `Hola ${item.cliente}! Te recuerdo la cuota #${next.n} por ${fmt(next.cuota)} con vencimiento ${next.fecha}. Saldo aprox: ${fmt(item.plan.filter(c=>!c.pagado).reduce((a,c)=>a+c.cuota,0))}.`
-                         : `Hola ${item.cliente}! Gracias por cancelar tu préstamo. Quedo a disposición.`;
-        const num = (item.tel||'').replace(/\D/g,''); const link = `https://wa.me/${num}?text=${encodeURIComponent(txt)}`; window.open(link, '_blank');
-      }
-      if(act==='editar'){
-        const nuevo = prompt('Editar nombre del cliente:', item.cliente); if(nuevo!==null){ item.cliente = nuevo.trim(); persist(); renderList(); }
-      }
-    });
-
-    function mostrarPlan(item){
-      const root = document.createElement('div');
-      root.appendChild(document.getElementById('tplPlan').content.cloneNode(true));
-      item.plan.forEach(c=>{
-        const row = document.createElement('div'); row.className='schedule-row';
-        row.innerHTML = `<div>${c.n}</div><div>${c.fecha}</div><div>${fmt(c.cuota)}</div><div>${fmt(c.saldo)}</div><div>${c.pagado? 'Pagado '+(c.pagoFecha||''): '<em class="subtitle">pendiente</em>'}</div>`; root.appendChild(row);
-      });
-      const w = window.open('', '_blank', 'width=860,height=760');
-      w.document.write(`<!doctype html><title>Plan de pagos — ${item.cliente}</title><meta charset="utf-8"><style>body{font-family:Inter,system-ui,sans-serif;background:#000;color:#e8eef7;margin:0;padding:16px} .schedule-row{display:grid;grid-template-columns:62px 1fr 140px 140px 120px;gap:8px;padding:10px} .schedule-row:nth-child(odd){background:rgba(255,255,255,.08)} .schedule-head{font-size:12px;color:#97a3b6;background:rgba(255,255,255,.14)} .title{font-weight:900;margin-bottom:10px;font-size:18px}</style>`);
-      w.document.write(`<h3 class="title">${item.cliente} — ${fmt(item.monto)} → ${fmt(item.total)} (${item.cuotas}× ${fmt(item.cuota)})</h3>`);
-      w.document.body.appendChild(root); w.document.close();
-    }
-
-    // Inicial
-    restore();
-    renderPreview(leerForm());
-  </script>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
